@@ -1,0 +1,48 @@
+{
+	"auto_complete_commit_on_tab": true,
+	"draw_white_space": "selection",
+	"find_selected_text": true,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		".tmp",
+		".sass-cache",
+		"CVS",
+		"_build",
+		"site"
+	],
+	"font_face": "Menlo",
+	"font_options":
+	[
+		"subpixel_antialias"
+	],
+	"font_size": 14.0,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"pep8_ignore":
+	[
+		"E501"
+	],
+	"rulers":
+	[
+		72,
+		79
+	],
+	// "soda_classic_tabs": false,
+	// "soda_folder_icons": true,
+	// "theme": "Soda Dark.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_automatic_white_space": true,
+	"trim_trailing_white_space_on_save": true,
+	"word_wrap": false
+}

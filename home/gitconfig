@@ -1,0 +1,24 @@
+[user]
+  name = Greg Losie
+  email = glosie@gmail.com
+
+[core]
+  editor = subl -n -w
+  quotepath = false
+  excludesfile = /Users/greg/.gitignore
+
+[credential]
+  helper = osxkeychain
+
+[color]
+  ui = true
+
+[format]
+  pretty = %Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset
+  graph = true
+
+[log]
+  abbrevCommit = true
+
+[push]
+  default = simple
