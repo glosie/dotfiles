@@ -13,13 +13,12 @@ prompt 'gjl'
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # Customize to your needs...
-export PATH=~/bin:/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:/usr/local/git/bin:$PATH
 export GREP_OPTIONS='--color=auto'
 export EDITOR='subl -w'
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.virtualenvs
-source /usr/local/share/python/virtualenvwrapper.sh
+source /usr/local/bin/virtualenvwrapper.sh
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 

@@ -1,0 +1,13 @@
+{
+	"installed_packages":
+	[
+		"Backbone.Marionette",
+		"CoffeeScript",
+		"eco",
+		"ERB Insert and Toggle Commands",
+		"Package Control",
+		"Solarized Color Scheme",
+		"SublimeLinter",
+		"Theme - Soda"
+	]
+}
