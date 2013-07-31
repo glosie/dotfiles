@@ -24,11 +24,11 @@ export PIP_RESPECT_VIRTUALENV=true
 
 #node
 export NODE_PATH="/usr/local/lib/node"
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
-export rvmsudo_secure_path=1
+#rbenv
+export PATH="$HOME/.rbenv/bin:/usr/local/opt/ruby/bin:$PATH"
+eval "$(rbenv init -)"
+
 
 # Useful global aliases.
 alias -g 'H'='| head'     # git log H

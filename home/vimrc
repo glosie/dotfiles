@@ -5,6 +5,6 @@ set mouse=a
 set number
 filetype plugin indent on
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 set laststatus=2
-source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
+"source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
