@@ -42,7 +42,7 @@ function build_prompt {
 }
 
 start_time=$SECONDS
-function prompt_gjl_preexec {
+function prompt_paradox_preexec {
   start_time=$SECONDS
 }
 
@@ -62,7 +62,7 @@ function calc_elapsed_time {
   fi
 }
 
-function prompt_gjl_precmd {
+function prompt_paradox_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
@@ -77,7 +77,7 @@ function prompt_gjl_precmd {
   start_time=$SECONDS
 }
 
-function prompt_gjl_setup {
+function prompt_paradox_setup {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
   prompt_opts=(cr percent subst)
@@ -86,13 +86,14 @@ function prompt_gjl_setup {
   autoload -Uz add-zsh-hook
 
   # Add hook for calling git-info before each command.
-  add-zsh-hook preexec prompt_gjl_preexec
-  add-zsh-hook precmd prompt_gjl_precmd
+  add-zsh-hook preexec prompt_paradox_preexec
+  add-zsh-hook precmd prompt_paradox_precmd
 
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary' format '%B%F{blue}❯%f%b'
   zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format '%F{red}♺%f'
   zstyle ':prezto:module:editor:info:keymap:alternate' format '%B%F{red}❮%f%b'
+  zstyle ':prezto:module:git:info' verbose 'yes'
   zstyle ':prezto:module:git:info:action' format '! %s'
   zstyle ':prezto:module:git:info:added' format '✚'
   zstyle ':prezto:module:git:info:ahead' format '⬆'
@@ -118,4 +119,4 @@ function prompt_gjl_setup {
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
-prompt_gjl_setup "$@"
+prompt_paradox_setup "$@"
