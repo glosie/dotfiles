@@ -1,0 +1,50 @@
+{
+	"auto_complete_commit_on_tab": true,
+	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
+	"draw_white_space": "all",
+	"find_selected_text": true,
+	"flatland_sidebar_tree_medium": true,
+	"flatland_square_tabs": true,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		".tmp",
+		".sass-cache",
+		"CVS",
+		"_build",
+		"site",
+		"source_maps"
+	],
+	"font_face": "Menlo",
+	"font_options":
+	[
+		"subpixel_antialias"
+	],
+	"font_size": 14,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Vintage",
+		"SideBarEnhancements"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"pep8_ignore":
+	[
+		"E501"
+	],
+	"rulers":
+	[
+		80
+	],
+	"theme": "Flatland Dark.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_automatic_white_space": false,
+	"trim_trailing_white_space_on_save": false,
+	"word_wrap": false
+}

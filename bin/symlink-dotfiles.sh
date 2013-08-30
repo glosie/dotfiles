@@ -32,5 +32,5 @@ for location in bin/*; do
 done
 
 if [[ `uname` == 'Darwin' ]]; then
-  link "$dotfiles/sublime/Packages/User/" "$HOME/Library/Application Support/Sublime Text 2/Packages/User"
+  link "$dotfiles/sublime3/" "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
 fi

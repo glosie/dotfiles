@@ -1,0 +1,14 @@
+{
+    "auto_complete_triggers":
+    [
+        {
+            "selector": "source.python - string - comment - constant.numeroc",
+            "characters": "."
+        }
+    ],
+    "rulers":
+    [
+      72,
+      79
+    ]
+}
