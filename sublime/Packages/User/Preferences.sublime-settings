@@ -1,7 +1,7 @@
 {
 	"auto_complete_commit_on_tab": true,
 	"color_scheme": "Packages/Solarized Color Scheme/Solarized (dark).tmTheme",
-	"draw_white_space": "selection",
+	"draw_white_space": "all",
 	"find_selected_text": true,
 	"folder_exclude_patterns":
 	[
@@ -12,7 +12,8 @@
 		".sass-cache",
 		"CVS",
 		"_build",
-		"site"
+		"site",
+		"source_maps"
 	],
 	"font_face": "Menlo",
 	"font_options":
@@ -42,7 +43,7 @@
 	"soda_folder_icons": true,
 	"theme": "Soda Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_automatic_white_space": true,
-	"trim_trailing_white_space_on_save": true,
+	"trim_automatic_white_space": false,
+	"trim_trailing_white_space_on_save": false,
 	"word_wrap": false
 }
