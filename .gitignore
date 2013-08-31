@@ -1,3 +1,5 @@
 .DS_Store
 *.pyc
-/Textmate/TextMate.pid
+
+# Ignore ST3 Package Control files
+/sublime3/Package\ Control.*
