@@ -24,6 +24,7 @@ export PIP_RESPECT_VIRTUALENV=true
 
 #node
 export NODE_PATH="/usr/local/lib/node"
+export PATH="/usr/local/share/npm/bin:$PATH"
 
 #rbenv
 export PATH="$HOME/.rbenv/bin:/usr/local/opt/ruby/bin:$PATH"

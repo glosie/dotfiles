@@ -66,6 +66,8 @@ function prompt_paradox_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
 
+  python-info
+  
   # Get Git repository information.
   if (( $+functions[git-info] )); then
     git_status=git-info
@@ -110,12 +112,15 @@ function prompt_paradox_setup {
   zstyle ':prezto:module:git:info:keys' format \
     'prompt' '$(coalesce "%b" "%p" "%c")%s' \
     'status' ' %A%B%S%a%d%m%r%U%u'
+  
+  # %v - virtualenv name.
+  zstyle ':prezto:module:python:info:virtualenv' format '(env:%v)'
 
   # Define prompts.
   PROMPT='
 %{%f%b%k%}$(build_prompt)
  ${editor_info[keymap]} '
-  RPROMPT='[%D{%L:%M:%S %p}]'
+  RPROMPT='%B$python_info[virtualenv]%b [%D{%L:%M:%S %p}]'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
