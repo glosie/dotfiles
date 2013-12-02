@@ -15,7 +15,8 @@
 		"CVS",
 		"_build",
 		"site",
-		"source_maps"
+		"source_maps",
+		"tmp/cache"
 	],
 	"font_face": "Menlo",
 	"font_options":
@@ -26,7 +27,6 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Solarized Color Scheme",
 		"Vintage"
 	],
 	"indent_guide_options":
