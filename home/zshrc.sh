@@ -38,6 +38,16 @@ alias -g 'F'='| head -n'  # git log F 15
 alias -g 'L'='| tail -n'  # git log L 10
 alias -g 'C'='| wc -l'    # git log C
 
+# Git Alias overrides
+# Log (l)
+alias gl='git log --pretty=format:${_git_log_medium_format}'
+alias gls='git log --stat --pretty=format:${_git_log_medium_format}'
+alias gld='git log --stat --patch --full-diff --pretty=format:${_git_log_medium_format}'
+alias glo='git log'
+alias glg='git log --all --graph --pretty=format:${_git_log_oneline_format}'
+alias glb='git log --pretty=format:${_git_log_brief_format}'
+alias glc='git shortlog --summary --numbered'
+
 # Some OS X-only stuff.
 if [[ "$OSTYPE" == darwin* ]]; then
   # Short-cuts for copy-paste.
