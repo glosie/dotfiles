@@ -1,7 +1,8 @@
 {
 	"auto_complete_commit_on_tab": true,
-	"color_scheme": "Packages/Theme - Flatland/Flatland Dark.tmTheme",
+	"color_scheme": "Packages/User/Flatland Dark (SL).tmTheme",
 	"draw_white_space": "all",
+	"enable_tab_scrolling": false,
 	"find_selected_text": true,
 	"flatland_sidebar_tree_medium": true,
 	"flatland_square_tabs": true,
@@ -34,6 +35,8 @@
 		"draw_normal",
 		"draw_active"
 	],
+	"itg_sidebar_tree_xlarge": true,
+	"itg_small_tabs": true,
 	"pep8_ignore":
 	[
 		"E501"
@@ -42,7 +45,8 @@
 	[
 		80
 	],
-	"theme": "Flatland Dark.sublime-theme",
+	"smart_indent": true,
+	"theme": "itg.flat.dark.blue.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": false,
 	"trim_trailing_white_space_on_save": false,
