@@ -35,6 +35,7 @@ alias -g 'C'='| wc -l'    # git log C
 
 # Git Alias overrides
 # Log (l)
+alias git=hub
 alias gl='git log --pretty=format:${_git_log_medium_format}'
 alias gls='git log --stat --pretty=format:${_git_log_medium_format}'
 alias gld='git log --stat --patch --full-diff --pretty=format:${_git_log_medium_format}'
