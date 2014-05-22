@@ -9,4 +9,4 @@ curl --silent https://raw.github.com/glosie/dotfiles/master/install.sh | sh
 * `etc` — various stuff like osx text substitutions / hosts backup
 * `git-extras` — useful git functions, defined in `home/gitconfig`
 * `home` — files that are symlinked to `$HOME` directory
-* `sublime` — sublime text 2 theme & settings
+* `sublime3` — sublime text 3 theme & settings
