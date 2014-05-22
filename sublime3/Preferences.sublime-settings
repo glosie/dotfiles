@@ -4,8 +4,6 @@
 	"draw_white_space": "all",
 	"enable_tab_scrolling": false,
 	"find_selected_text": true,
-	"flatland_sidebar_tree_medium": true,
-	"flatland_square_tabs": true,
 	"folder_exclude_patterns":
 	[
 		".svn",
@@ -28,7 +26,9 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Markdown",
+		"Vintage",
+		"Color Highlighter"
 	],
 	"indent_guide_options":
 	[
