@@ -12,8 +12,8 @@ open_apps() {
   open http://www.mozilla.org/en-US/firefox/new/
   echo 'iTerm2:'
   open http://www.iterm2.com/#/section/downloads
-  echo 'Sublime Text 2'
-  open http://www.sublimetext.com/2
+  echo 'Sublime Text 3'
+  open http://www.sublimetext.com/3
   echo 'Alfred:'
   open http://www.alfredapp.com/#download
   echo 'VLC:'
