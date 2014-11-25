@@ -5,5 +5,5 @@ dir="$HOME/Projects"
 mkdir -p $dir
 cd $dir
 git clone --recursive git://github.com/glosie/dotfiles.git
-cd dotfiles
-sudo bash bin/symlink-dotfiles.sh
+# cd dotfiles
+# sudo bash bin/symlink-dotfiles.sh

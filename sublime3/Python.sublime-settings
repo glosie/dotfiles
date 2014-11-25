@@ -1,14 +1,24 @@
 {
-    "auto_complete_triggers":
-    [
-        {
-            "selector": "source.python - string - comment - constant.numeroc",
-            "characters": "."
-        }
-    ],
-    "rulers":
-    [
-      72,
-      79
-    ]
+	"apply_syntax_extensions":
+	[
+		"pyw",
+		"py3"
+	],
+	"auto_complete_triggers":
+	[
+		{
+			"characters": ".",
+			"selector": "source.python - string - comment - constant.numeroc"
+		}
+	],
+	"extensions":
+	[
+		"pyw",
+		"py3"
+	],
+	"rulers":
+	[
+		72,
+		79
+	]
 }

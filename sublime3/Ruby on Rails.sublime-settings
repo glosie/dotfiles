@@ -1,8 +1,6 @@
 {
-"extensions":
-  [
-    "rabl"
-  ],
-
-  "tab_size": 2
+	"extensions":
+	[
+	],
+	"tab_size": 2
 }

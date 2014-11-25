@@ -34,6 +34,7 @@
                 "builtins": "",
                 "excludes": [],
                 "ignore": "",
+                "jobs": "1",
                 "max-complexity": -1,
                 "max-line-length": null,
                 "select": ""
@@ -43,10 +44,16 @@
                 "args": [],
                 "excludes": []
             },
-            "json": {
+            "jslint": {
                 "@disable": false,
                 "args": [],
                 "excludes": []
+            },
+            "json": {
+                "@disable": false,
+                "args": [],
+                "excludes": [],
+                "strict": true
             },
             "rubocop": {
                 "@disable": false,

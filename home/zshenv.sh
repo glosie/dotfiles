@@ -59,8 +59,3 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 if [[ ! -d "$TMPPREFIX" ]]; then
   mkdir -p "$TMPPREFIX"
 fi
-
-#rbenv
-export PATH="$HOME/.rbenv/bin:/usr/local/opt/ruby/bin:$PATH"
-eval "$(rbenv init -)"
-

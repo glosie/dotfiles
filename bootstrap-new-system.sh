@@ -49,21 +49,4 @@ fi
 echo 'Symlinking config files...'
   source 'bin/symlink-dotfiles.sh'
 
-echo 'Applying sublime config...'
-  st=$(pwd)/sublime/packages
-  as="$HOME/Application Support/Sublime Text 2/Packages"
-  # asprefs="$as/User/Preferences.sublime-settings"
-  if [[ -d "$as" ]]; then
-    for theme in $st/Theme*; do
-      cp -r $theme $as
-    done
-    cp -r $st/gjl-themes $as
-    for pref in $st/User; do
-      rm $as/User/$pref
-      ln -s "$st/User/$pref" $as/User/$pref
-    done
-  else
-    echo "Install Sublime Text http://www.sublimetext.com"
-  fi
-
 popd

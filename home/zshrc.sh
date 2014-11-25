@@ -137,3 +137,6 @@ function gitio() {
   curl -s -i 'http://git.io' -F "url=$url" -F "code=$code"
 }
 
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"

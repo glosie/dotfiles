@@ -2,11 +2,12 @@
 	"installed_packages":
 	[
 		"ApplySyntax",
-		"Arduino-like IDE",
 		"Better CoffeeScript",
 		"CoffeeCompile",
 		"Color Highlighter",
 		"Color Scheme - Nice Blue Soda",
+		"ColorSchemeSelector",
+		"Dayle Rees Color Schemes",
 		"DocBlockr",
 		"Dockerfile Syntax Highlighting",
 		"eco",
@@ -24,9 +25,9 @@
 		"Monokai Gray",
 		"Predawn",
 		"Python Flake8 Lint",
+		"RSense",
 		"Sass",
 		"SassBeautify",
-		"Schemr",
 		"SCSS",
 		"SideBarEnhancements",
 		"Solarized Color Scheme",
@@ -50,9 +51,8 @@
 		"Theme - Piatto",
 		"Theme - Spacefunk",
 		"Theme - Spacegray",
-		"Theme - Tech49",
 		"Themr",
-		"TrailingSpaces",
-		"Wombat Theme"
+		"TomDoc",
+		"TrailingSpaces"
 	]
 }
