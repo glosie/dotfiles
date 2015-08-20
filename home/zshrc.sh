@@ -146,3 +146,6 @@ eval "$(rbenv init -)"
 
 # c66 autocomplete
 source /usr/local/cloud66/zsh_autocomplete
+
+# docker
+eval `boot2docker shellinit 2>/dev/null`
