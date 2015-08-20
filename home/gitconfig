@@ -3,7 +3,7 @@
   email = greg@cloversites.com
 
 [core]
-  editor = subl -n -w
+	editor = atom --wait
   quotepath = false
   excludesfile = /Users/greg/.gitignore
 
