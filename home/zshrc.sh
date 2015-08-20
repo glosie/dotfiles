@@ -143,3 +143,6 @@ function gitio() {
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# c66 autocomplete
+source /usr/local/cloud66/zsh_autocomplete
