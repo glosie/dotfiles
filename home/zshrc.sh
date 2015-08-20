@@ -44,6 +44,9 @@ alias glg='git log --all --graph --pretty=format:${_git_log_oneline_format}'
 alias glb='git log --pretty=format:${_git_log_brief_format}'
 alias glc='git shortlog --summary --numbered'
 
+# restart pow
+alias powpow='powder down && powder up'
+
 # Some OS X-only stuff.
 if [[ "$OSTYPE" == darwin* ]]; then
   # Short-cuts for copy-paste.
