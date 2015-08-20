@@ -1,7 +1,12 @@
 {
 	"auto_complete_commit_on_tab": true,
+	"binary_exclude_patterns":
+	[
+		"doc/*",
+		"node_modules/*"
+	],
 	"close_windows_when_empty": true,
-	"color_scheme": "Packages/User/Solarized (Dark) (SL).tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Solarized (Dark) (SL).tmTheme",
 	"draw_white_space": "all",
 	"enable_tab_scrolling": false,
 	"find_selected_text": true,
@@ -26,10 +31,9 @@
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Color Highlighter",
-		"Solarized Color Scheme",
 		"Vintage",
-		"Markdown"
+		"Markdown",
+		"Color Highlighter"
 	],
 	"indent_guide_options":
 	[
@@ -47,7 +51,9 @@
 		80
 	],
 	"smart_indent": true,
-	"theme": "itg.flat.dark.blue.sublime-theme",
+	"tabs_medium": true,
+	"status_bar_brighter": true,
+	"theme": "Afterglow-blue.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": false,
 	"trim_trailing_white_space_on_save": false,

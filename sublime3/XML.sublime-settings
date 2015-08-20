@@ -1,0 +1,14 @@
+{
+	"apply_syntax_extensions":
+	[
+		"xml.dist"
+	],
+	"extensions":
+	[
+		"xsd",
+		"xslt",
+		"xml.dist",
+		"xml",
+		"svg"
+	]
+}
