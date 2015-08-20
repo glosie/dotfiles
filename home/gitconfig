@@ -55,3 +55,5 @@
 [merge "bundler"]
 	name = Resolves Gemfile.lock merge conflicts by running `bundle install`
 	driver = echo Gemfile.lock merge conflict, running bundle install && bundle install --quiet
+[heroku]
+	account = personal
