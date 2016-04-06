@@ -1,9 +1,9 @@
 [user]
   name = Greg Losie
-  email = greg@cloversites.com
+  email = glosie@gmail.com
 
 [core]
-	editor = atom --wait
+  editor = atom --wait
   quotepath = false
   excludesfile = /Users/greg/.gitignore
 
@@ -25,35 +25,29 @@
 
 [difftool "Kaleidoscope"]
   cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-  
+
 [diff]
   tool = Kaleidoscope
-  
+
 [difftool]
   prompt = false
-  
+
 [mergetool "Kaleidoscope"]
   cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
   trustExitCode = true
-  
+
 [mergetool]
   prompt = false
-  
+
 [merge]
   tool = Kaleidoscope
-  
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-  
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-  
+
 [rebase]
   autosquash = true
+
 [merge "bundler"]
-	name = Resolves Gemfile.lock merge conflicts by running `bundle install`
-	driver = echo Gemfile.lock merge conflict, running bundle install && bundle install --quiet
+  name = Resolves Gemfile.lock merge conflicts by running `bundle install`
+  driver = echo Gemfile.lock merge conflict, running bundle install && bundle install --quiet
+
 [heroku]
-	account = personal
+  account = personal
