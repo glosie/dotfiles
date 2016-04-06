@@ -1,6 +1,5 @@
 [user]
   name = Greg Losie
-  email = glosie@gmail.com
 
 [core]
   editor = atom --wait
