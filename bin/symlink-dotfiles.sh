@@ -30,7 +30,3 @@ for location in bin/*; do
   file="${file%.*}"
   link "$dotfiles/$location" "$bin/$file"
 done
-
-if [[ `uname` == 'Darwin' ]]; then
-  link "$dotfiles/sublime3/" "$HOME/Library/Application Support/Sublime Text 3/Packages/User"
-fi
