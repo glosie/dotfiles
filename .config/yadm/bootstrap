@@ -1,0 +1,44 @@
+#!/usr/bin/env fish
+
+set system_type (uname -s)
+
+if test $system_type = "Darwin"
+  # install homebrew if it's missing
+  if ! test (which brew)
+    echo "🍻 Installing homebrew"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install
+  end
+
+  if test -f $HOME/.config/brew/Brewfile
+    echo "📦 Updating homebrew bundle"
+    brew bundle --file=$HOME/.config/brew/Brewfile
+  end
+end
+
+
+if test ! (basename $SHELL) = "fish"
+  whiptail --yesno "Set the default shell to fish?" 8 50
+  if test $status -eq 0
+    echo "🐟 Configuring fish shell"
+    set -l fish_path (which fish)
+    echo $fish_path | sudo tee -a /etc/shells
+    chsh -s $fish_path
+  end
+end
+
+# install fisher and plugins
+if test -f $HOME/.config/fish/functions/fisher.fish
+  echo "🎣 Installing fisher and plugins"
+  curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+  # install plugins
+  fisher
+end
+
+# install volta
+if test ! (which volta)
+  whiptail --yesno "Install Volta?" 8 50
+  if test $status -eq 0
+    echo "⚡ Installing Volta"
+    curl https://get.volta.sh | bash -s -- --skip-setup
+  end
+end

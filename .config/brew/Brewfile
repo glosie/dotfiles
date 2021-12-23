@@ -1,0 +1,9 @@
+brew "fish"
+brew "starship"
+brew "git"
+brew "rbenv"
+brew "asdf"
+brew "newt"
+
+tap "git-duet/tap"
+brew "git-duet/tap/git-duet"
