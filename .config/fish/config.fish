@@ -12,7 +12,7 @@ set -gx PATH "$VOLTA_HOME/bin" $PATH
 
 # PCO
 set -gx AWS_CLI_PATH (which aws)
-if test (which bass)    
+if functions --query bass 
     bass source ($HOME/Code/pco/bin/pco init - | psub)
 end
 
@@ -21,7 +21,7 @@ if test -f $HOME/.pcorc
 end
 
 # asdf
-if test (which asdf)
+if functions --query asdf
     if test -f /opt/homebrew/opt/asdf/libexec/asdf.fish
         source /opt/homebrew/opt/asdf/libexec/asdf.fish
     else if $HOME/.asdf/asdf.fish
