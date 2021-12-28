@@ -17,7 +17,7 @@ if [ "$system_type" = "Darwin" ]; then
 elif [ "$system_type" = "Linux" ]; then
     sudo apt-add-repository ppa:fish-shell/release-3
     sudo apt update
-    sudo apt install fish starship
+    sudo apt install fish starship direnv
 fi
 
 # if we have fish make it the default shell

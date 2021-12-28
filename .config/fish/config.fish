@@ -4,21 +4,9 @@ end
 
 set fish_greeting ""
 
-starship init fish | source
-
 # VOLTA
 set -gx VOLTA_HOME "$HOME/.volta"
 set -gx PATH "$VOLTA_HOME/bin" $PATH
-
-# PCO
-set -gx AWS_CLI_PATH (which aws)
-if functions --query bass 
-    bass source ($HOME/Code/pco/bin/pco init - | psub)
-end
-
-if test -f $HOME/.pcorc
-    source $HOME/.pcorc
-end
 
 # asdf
 if functions --query asdf
@@ -32,3 +20,15 @@ end
 # git
 set -gx GIT_DUET_CO_AUTHORED_BY 1
 alias glo='git log --oneline --decorate'
+
+
+if functions --query bass
+    bass source ($HOME/Code/pco/bin/pco init - | psub)
+end
+
+# PCO
+set -gx AWS_CLI_PATH (which aws)
+
+test -f $HOME/.pcorc; and source $HOME/.pcorc
+starship init fish | source
+direnv hook fish | source
