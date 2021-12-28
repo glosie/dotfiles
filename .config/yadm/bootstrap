@@ -15,8 +15,9 @@ if [ "$system_type" = "Darwin" ]; then
         brew bundle --file=$HOME/.config/brew/Brewfile
     fi
 elif [ "$system_type" = "Linux" ]; then
-    sudo apt-get update
-    sudo apt-get install fish starship
+    sudo apt-add-repository ppa:fish-shell/release-3
+    sudo apt update
+    sudo apt install fish starship
 fi
 
 # if we have fish make it the default shell
