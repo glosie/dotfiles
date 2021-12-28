@@ -1,4 +1,46 @@
 [include]
   path = .gitconfig.local
+
+[alias]
+	recent = !git for-each-ref --sort=committerdate refs/heads/ --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)'
+
+[core]
+  editor = code --wait
+  quotepath = false
+  excludesfile = ~/.gitignore
+  commentChar = ";"
+
+[credential]
+  helper = osxkeychain
+
+[format]
+  pretty = %Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset
+
+[log]
+  abbrevCommit = true
+
+[push]
+  default = current
+  followTags = true
+
 [rebase]
 	autosquash = true
+
+[help]
+  autocorrect = 1
+
+[fetch]
+	prune = true
+
+[rerere]
+	enabled = true
+	autoupdate = false
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[pull]
+	ff = only
