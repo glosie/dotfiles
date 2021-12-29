@@ -2,10 +2,10 @@
   path = .gitconfig.local
 
 [alias]
-	recent = !git for-each-ref --sort=committerdate refs/heads/ --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)'
+  recent = !git for-each-ref --sort=committerdate refs/heads/ --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)'
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [core]
   editor = code --wait
@@ -17,13 +17,13 @@
   helper = osxkeychain
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 
 [fetch]
-	prune = true
+  prune = true
 
 [format]
   pretty = %Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset
@@ -35,15 +35,15 @@
   abbrevCommit = true
 
 [pull]
-	ff = only
+  ff = only
 
 [push]
   default = current
   followTags = true
 
 [rebase]
-	autosquash = true
+  autosquash = true
 
 [rerere]
-	enabled = true
-	autoupdate = false
+  enabled = true
+  autoupdate = false
