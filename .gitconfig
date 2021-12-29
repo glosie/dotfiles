@@ -4,6 +4,9 @@
 [alias]
 	recent = !git for-each-ref --sort=committerdate refs/heads/ --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)'
 
+[commit]
+	gpgsign = true
+
 [core]
   editor = code --wait
   quotepath = false
@@ -13,11 +16,26 @@
 [credential]
   helper = osxkeychain
 
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[fetch]
+	prune = true
+
 [format]
   pretty = %Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset
 
+[help]
+  autocorrect = 1
+
 [log]
   abbrevCommit = true
+
+[pull]
+	ff = only
 
 [push]
   default = current
@@ -26,21 +44,6 @@
 [rebase]
 	autosquash = true
 
-[help]
-  autocorrect = 1
-
-[fetch]
-	prune = true
-
 [rerere]
 	enabled = true
 	autoupdate = false
-
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
-
-[pull]
-	ff = only
