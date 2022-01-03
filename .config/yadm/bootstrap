@@ -15,9 +15,11 @@ if [ "$system_type" = "Darwin" ]; then
         brew bundle --file=$HOME/.config/brew/Brewfile
     fi
 elif [ "$system_type" = "Linux" ]; then
+    echo "📦 Installing packages"
     sudo apt-add-repository ppa:fish-shell/release-3
     sudo apt update
-    sudo apt install fish starship direnv
+    sudo apt install fish direnv
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 fi
 
 # if we have fish make it the default shell
@@ -26,12 +28,10 @@ if command -v fish >/dev/null 2>&1; then
     if [ $? -eq 0 ]; then
         echo "🐟 Configuring fish shell"
         echo `which fish` | sudo tee -a /etc/shells
-        chsh -s `which fish`
+        sudo chsh -s $(which fish) ubuntu
 
         echo "🎣 Installing fisher and plugins"
         fish -c "curl -sL https://git.io/fisher | source && fisher update"
-        # install plugins
-        fish -c "fisher update"
     fi
 fi
 
@@ -46,6 +46,6 @@ fi
 
 # vim
 if command -v vim >/dev/null 2>&1; then
-  echo "Bootstraping Vim"
-  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+    echo "🥾 Bootstraping Vim"
+    vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
 fi
