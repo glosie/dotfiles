@@ -25,9 +25,10 @@ silent! if plug#begin()
 endif
 
 autocmd vimenter * ++nested colorscheme gruvbox
-" autocmd vimenter * hi Normal ctermbg=NONE guibg=NONE
-
+autocmd vimenter * hi Normal ctermbg=NONE guibg=NONE
+ 
 let g:gruvbox_transparent_bg = 1
+set background=dark
 set number
 set tabstop=2
 set shiftwidth=2
