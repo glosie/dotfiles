@@ -8,7 +8,7 @@
   gpgsign = true
 
 [core]
-  editor = code --wait
+  editor = $EDITOR
   quotepath = false
   excludesfile = ~/.gitignore
   commentChar = ";"
