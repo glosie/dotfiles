@@ -18,7 +18,7 @@ elif [ "$system_type" = "Linux" ]; then
     echo "📦 Installing packages"
     sudo apt-add-repository ppa:fish-shell/release-3
     sudo apt update
-    sudo apt install fish direnv
+    sudo apt install fish direnv ripgrep
     sh -c "$(curl -fsSL https://starship.rs/install.sh)"
 fi
 

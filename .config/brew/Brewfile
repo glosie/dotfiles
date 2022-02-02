@@ -6,6 +6,7 @@ brew "rbenv"
 brew "asdf"
 brew "newt"
 brew "direnv"
+brew "ripgrep"
 
 tap "git-duet/tap"
 brew "git-duet/tap/git-duet"
