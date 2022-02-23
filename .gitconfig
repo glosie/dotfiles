@@ -1,5 +1,6 @@
 [include]
   path = .gitconfig.local
+	path = .gitconfig.platform
 
 [alias]
   recent = !git for-each-ref --sort=-committerdate refs/heads/ --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)'
@@ -12,9 +13,6 @@
   quotepath = false
   excludesfile = ~/.gitignore
   commentChar = ";"
-
-[credential]
-  helper = osxkeychain
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
