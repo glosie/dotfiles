@@ -38,6 +38,7 @@
 [push]
 	default = current
   followTags = true
+	autoSetupRemote = true
 
 [rebase]
   autosquash = true
