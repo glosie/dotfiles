@@ -1,0 +1,11 @@
+{% if vars.machine_class == "work" -%}
+[include]
+  path = ~/.gitconfig.personal
+[includeIf "gitdir/i:~/Code/"]
+  path = ~/.gitconfig.work
+{% else -%}
+[user]
+	name = Greg Losie
+	email = glosie@gmail.com
+	signingkey = 9D12D1422BE498BB
+{% endif -%}

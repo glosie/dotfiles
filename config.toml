@@ -1,0 +1,85 @@
+[tools]
+erlang = "latest"
+node = "22"
+elixir = "latest"
+usage = "latest"
+ruby = "4"
+herdr = "latest"
+hunk = "latest"
+uv = "latest"
+python = "latest"
+go = "latest"
+tmux = "latest"
+jj = "latest"
+neovim = "latest"
+opencode = "latest"
+rg = "latest"
+worktrunk = "latest"
+glow = "latest"
+bat = "latest"
+circleci = "latest"
+fastfetch = "latest"
+gh = "latest"
+helix = "latest"
+hyperfine = "latest"
+tree-sitter = "latest"
+watchexec = "latest"
+rust = "latest"
+pi = "latest"
+fnox = { version = "latest", workflow = "release.yml" }
+age = "latest"
+aws-cli = { version = "latest", symlink_bins = "true" }
+starship = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = []
+dotfiles.root = "~/.config/mise"
+
+# Per-machine choice for templates. Set it with `mise vars machine_class=work`.
+[vars.machine_class]
+default = "personal"
+prompt = "Machine class (work or personal)"
+
+[dotfile_groups.home]
+root = "home"
+target = "~"
+mode = "symlink-each"
+dot_prefix = true
+
+[dotfile_groups.home.entries]
+# Link the whole directory so lazy.nvim can rewrite lazy-lock.json in place.
+"~/.config/nvim" = { mode = "symlink" }
+
+[dotfiles]
+"~/.gitconfig.local" = { source = "templates/gitconfig.local.tmpl", mode = "template" }
+"~/.gitconfig.platform" = { source = "templates/gitconfig.platform.tmpl", mode = "template" }
+
+[bootstrap.packages]
+"brew:fish" = { os = "macos" }
+"brew:git" = { os = "macos" }
+"brew:git-lfs" = { os = "macos" }
+"brew:gnupg" = { os = "macos" }
+"brew:direnv" = { os = "macos" }
+"brew:fd" = { os = "macos" }
+"brew:git-duet/tap/git-duet" = { os = "macos" }
+"apt:fish" = { os = "linux" }
+"apt:git" = { os = "linux" }
+"apt:git-lfs" = { os = "linux" }
+"apt:gnupg" = { os = "linux" }
+"apt:direnv" = { os = "linux" }
+"apt:fd-find" = { os = "linux" }
+
+[bootstrap.user]
+login_shell = "fish"
+
+[bootstrap.hooks.pre-packages]
+run = [
+  '''if [ "$(uname -s)" = Darwin ] && ! command -v brew >/dev/null 2>&1; then /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; fi''',
+  '''if [ "$(uname -s)" = Linux ] && command -v apt-add-repository >/dev/null 2>&1; then sudo apt-add-repository -y ppa:fish-shell/release-3; fi''',
+]
+
+[bootstrap.hooks.post-dotfiles]
+run = [
+  '''if command -v fish >/dev/null 2>&1; then fish -c 'type -q fisher; or begin; curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; and fisher update; end'; fi''',
+  '''if command -v vim >/dev/null 2>&1; then vim -E -s -u ~/.vimrc +PlugUpdate '+PlugClean!' +qall || true; fi''',
+]
