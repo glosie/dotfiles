@@ -1,0 +1,133 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "format_on_save": "on",
+  "show_whitespaces": "selection",
+  "cli_default_open_behavior": "new_window",
+  "project_panel": {
+    "dock": "left",
+  },
+  "outline_panel": {
+    "dock": "left",
+  },
+  "collaboration_panel": {
+    "dock": "left",
+  },
+  "git_panel": {
+    "group_by": "none",
+    "tree_view": true,
+    "dock": "left",
+  },
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+    "codex-acp": {
+      "type": "registry",
+    },
+  },
+  "vim_mode": true,
+  "always_treat_brackets_as_autoclosed": true,
+  "colorize_brackets": false,
+  "agent": {
+    "dock": "right",
+    "inline_assistant_model": {
+      "provider": "zed.dev",
+      "model": "claude-opus-4-6",
+      "enable_thinking": false,
+    },
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "default_model": {
+      "effort": "medium",
+      "enable_thinking": true,
+      "model": "gpt-6.1-sol",
+      "provider": "openai-subscribed",
+    },
+    "default_profile": "write",
+    "model_parameters": [],
+  },
+  "buffer_font_family": "MonoLisa",
+  "icon_theme": "Catppuccin Frappé",
+  "languages": {
+    "Git Commit": {
+      "preferred_line_length": 72,
+      "soft_wrap": "bounded",
+      "format_on_save": "on",
+      "wrap_guides": [72],
+    },
+    "JavaScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+      "formatter": {
+        "external": {
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+          "command": "node_modules/.bin/prettier",
+        },
+      },
+    },
+    "TypeScript": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "TSX": {
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+    },
+    "Ruby": {
+      "language_servers": [
+        "!solargraph",
+        "ruby-lsp",
+        "!rubocop",
+        "!sorbet",
+        "!steep",
+        "!kanayago",
+        "!fuzzy-ruby-server",
+        "...",
+      ],
+    },
+    "SQL": {
+      "formatter": {
+        "external": {
+          "command": "anbt-sql-formatter",
+        },
+      },
+    },
+    "Markdown": {
+      "soft_wrap": "bounded",
+      "preferred_line_length": 80,
+    },
+  },
+  "lsp": {
+    "ruby-lsp": {
+      "binary": {
+        "path": "$HOME/.config/zed/ruby-lsp-wrapper",
+      },
+      "initialization_options": {
+        "addonSettings": {
+          "Ruby LSP Rails": {
+            "enablePendingMigrationsPrompt": false,
+          },
+        },
+      },
+    },
+  },
+  "minimap": { "show": "auto" },
+  "theme": {
+    "dark": "Catppuccin Macchiato",
+    "light": "One Light",
+    "mode": "system",
+  },
+  "ui_font_size": 16,
+  "wrap_guides": [80, 100],
+}

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+if [ -f devbox.json ]; then
+  exec devbox run --pure -- sh -eu -c 'command -v ruby-lsp >/dev/null 2>&1 || gem install --no-document ruby-lsp >&2; exec ruby-lsp "$@"' sh "$@"
+elif [ -f mise.toml ] || [ -f .mise.toml ] || [ -f .tool-versions ]; then
+  exec mise x -- sh -eu -c 'command -v ruby-lsp >/dev/null 2>&1 || gem install --no-document ruby-lsp >&2; exec ruby-lsp "$@"' sh "$@"
+else
+  command -v ruby-lsp >/dev/null 2>&1 || gem install --no-document ruby-lsp >&2
+  exec ruby-lsp "$@"
+fi

@@ -1,0 +1,11 @@
+// Static tasks configuration.
+//
+// Example:
+[
+  {
+    "label": "test $ZED_RELATIVE_FILE:$ZED_ROW",
+    "command": "bundle exec rspec",
+    "args": ["\"$ZED_RELATIVE_FILE:$ZED_ROW\""],
+    "tags": ["ruby-test"],
+  },
+]
