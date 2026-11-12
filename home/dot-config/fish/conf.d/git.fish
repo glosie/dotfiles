@@ -1,5 +1,4 @@
 # git
-set -gx GIT_DUET_CO_AUTHORED_BY 1
 
 set -l _git_log_oneline_format (string escape '%Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset')
 set -l _git_log_medium_format (string escape '%C(bold)Commit:%C(reset) %C(green)%H%C(red)%d%n%C(bold)Author:%C(reset) %C(cyan)%an <%ae>%n%C(bold)Date:%C(reset)   %C(blue)%ai (%ar)%C(reset)%n%+B')

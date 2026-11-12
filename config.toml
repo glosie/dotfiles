@@ -61,7 +61,6 @@ dot_prefix = true
 "brew:gnupg" = { os = "macos" }
 "brew:direnv" = { os = "macos" }
 "brew:fd" = { os = "macos" }
-"brew:git-duet/tap/git-duet" = { os = "macos" }
 "apt:fish" = { os = "linux" }
 "apt:git" = { os = "linux" }
 "apt:git-lfs" = { os = "linux" }
