@@ -69,7 +69,7 @@ dot_prefix = true
 "apt:postgresql" = { os = "linux" }
 
 [bootstrap.user]
-login_shell = "fish"
+login_shell = "/opt/homebrew/bin/fish"
 
 [bootstrap.hooks.pre-packages]
 run = [
