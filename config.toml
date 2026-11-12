@@ -59,14 +59,12 @@ dot_prefix = true
 "brew:git" = { os = "macos" }
 "brew:git-lfs" = { os = "macos" }
 "brew:gnupg" = { os = "macos" }
-"brew:direnv" = { os = "macos" }
 "brew:fd" = { os = "macos" }
 "brew:postgresql@18" = { os = "macos" }
 "apt:fish" = { os = "linux" }
 "apt:git" = { os = "linux" }
 "apt:git-lfs" = { os = "linux" }
 "apt:gnupg" = { os = "linux" }
-"apt:direnv" = { os = "linux" }
 "apt:fd-find" = { os = "linux" }
 "apt:postgresql" = { os = "linux" }
 
