@@ -53,6 +53,7 @@ dot_prefix = true
 [dotfiles]
 "~/.gitconfig.local" = { source = "templates/gitconfig.local.tmpl", mode = "template" }
 "~/.gitconfig.platform" = { source = "templates/gitconfig.platform.tmpl", mode = "template" }
+"~/.config/jj/config.toml" = { source = "templates/jj-config.toml.tmpl", mode = "template" }
 
 [bootstrap.packages]
 "brew:fish" = { os = "macos" }

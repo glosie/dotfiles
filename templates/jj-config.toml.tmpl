@@ -19,12 +19,15 @@ sign-on-push = "~signed() & mine()"
 conflict-marker-style = "git"
 merge-editor = ":builtin"
 
+{% if vars.machine_class == "work" -%}
 [[--scope]]
 --when.repositories = ["~/Code"]
 
 [--scope.user]
 name = "Greg Losie"
 email = "greg@pco.bz"
+
+{% endif -%}
 
 [aliases]
 tidy = ["abandon", 'empty() & description(exact:"") & mutable() & ~merges() & ~@']
