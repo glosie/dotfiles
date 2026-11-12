@@ -1,0 +1,111 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Greg Losie"
+email = "glosie@gmail.com"
+
+[signing]
+behavior = "drop"
+backend = "gpg"
+key = "5A73B2392D9AAA99F7277D0378D807CBF14CDE14"
+
+[git]
+push = "origin"
+
+[revsets]
+sign-on-push = "~signed() & mine()"
+
+[ui]
+conflict-marker-style = "git"
+merge-editor = ":builtin"
+
+[[--scope]]
+--when.repositories = ["~/Code"]
+
+[--scope.user]
+name = "Greg Losie"
+email = "greg@pco.bz"
+
+[aliases]
+tidy = ["abandon", 'empty() & description(exact:"") & mutable() & ~merges() & ~@']
+
+[revset-aliases]
+'recent_work' = 'ancestors(visible_heads(), 3) & mutable()'
+'stack_relation(x)' = 'fork_point(main | x)::(main | x::)'
+
+[template-aliases]
+'git_log' = '''
+label("bold", "Change:") ++ " " ++
+label("green", change_id.shortest(8)) ++ "\n" ++
+label("bold", "Commit:") ++ " " ++
+label("green", commit_id) ++ " " ++
+label("red", bookmarks) ++ "\n" ++
+label("bold", "Author:") ++ " " ++
+label("cyan", author.name() ++ " <" ++ author.email() ++ ">") ++ "\n" ++
+label("bold", "Date:") ++ "   " ++
+label(
+  "blue",
+  author.timestamp().format("%Y-%m-%d %H:%M:%S %z") ++
+  " (" ++ author.timestamp().ago() ++ ")"
+) ++ "\n\n" ++
+description ++ "\n"
+'''
+
+'log_with_files' = '''
+if(root,
+  format_root_commit(self),
+  label(if(current_working_copy, "working_copy"),
+    concat(
+      format_short_commit_header(self) ++ "\n",
+      separate(" ",
+        if(empty, label("empty", "(empty)")),
+        if(description,
+          description.first_line(),
+          label(if(empty, "empty"), description_placeholder),
+        ),
+      ) ++ "\n",
+      if(self.contained_in("recent_work"), diff.summary()),
+    ),
+  )
+)
+'''
+
+[fix.tools.rubocop]
+enabled = false
+command = ["devbox", "run", "--pure", "bundle", "exec", "rubocop", "--stdin", "$path", "-a", "--stderr", "--fail-level", "fatal"]
+patterns = [
+  "glob:'**/*.rb'",
+  "glob:'**/*.gemspec'",
+  "glob:'**/*.rabl'",
+  "glob:'**/*.rake'",
+  "glob:'**/*.rbi'",
+  "glob:'**/*.rbuild'",
+  "glob:'**/*.rbs'",
+  "glob:'**/*.rbw'",
+  "glob:'**/*.rbx'",
+  "glob:'**/*.ru'",
+  "glob:'**/*.ruby'",
+  "glob:'**/*.spec'",
+  "glob:'**/*.thor'",
+  "glob:'**/*.watchr'",
+]
+
+[fix.tools.stree]
+enabled = false
+command = ["devbox", "run", "--pure", "stree", "format"]
+patterns = [
+  "glob:'**/*.rb'",
+  "glob:'**/*.gemspec'",
+  "glob:'**/*.rabl'",
+  "glob:'**/*.rake'",
+  "glob:'**/*.rbi'",
+  "glob:'**/*.rbuild'",
+  "glob:'**/*.rbs'",
+  "glob:'**/*.rbw'",
+  "glob:'**/*.rbx'",
+  "glob:'**/*.ru'",
+  "glob:'**/*.ruby'",
+  "glob:'**/*.spec'",
+  "glob:'**/*.thor'",
+  "glob:'**/*.watchr'",
+]
