@@ -1,8 +1,9 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    starship init fish | source
+
+    # uv
+    fish_add_path "/Users/glosie/.local/bin"
 end
 
 set fish_greeting ""
-
-starship init fish | source
-direnv hook fish | source
+# ~/.local/bin/mise activate fish | source

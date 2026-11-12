@@ -1,6 +1,7 @@
 switch (uname -s)
 case Darwin
   set -Ux EDITOR nvim
+  set -Ux BUNDLER_EDITOR zed
 case *
   set -Ux EDITOR nvim
 end

@@ -2,3 +2,8 @@
 *~
 *.swp
 .vscode
+.zed
+CLAUDE.local.md
+.claude/*.local.*
+
+**/.claude/.cc-writes/

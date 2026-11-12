@@ -1,18 +1,47 @@
 [include]
-  path = .gitconfig.local
+    path = .gitconfig.local
 	path = .gitconfig.platform
 
 [alias]
-  recent = !git for-each-ref --sort=-committerdate refs/heads/ --color=always --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)' | less -R
+    recent = !git for-each-ref --sort=-committerdate refs/heads/ --color=always --format='%(color:green)%(committerdate:relative)%09%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) - %(color:magenta)%(authorname)' | less -R
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[credential "https://github.com"]
+    helper =
+    helper = !~/.local/share/mise/shims/gh auth git-credential
+
+[credential "https://gist.github.com"]
+    helper =
+    helper = !~/.local/share/mise/shims/gh auth git-credential
 
 [commit]
-  gpgsign = true
+    gpgsign = true
+	verbose = true
 
 [core]
-  editor = $EDITOR
-  quotepath = false
-  excludesfile = ~/.gitignore
-  commentChar = ";"
+    editor = $EDITOR
+    quotepath = false
+    excludesfile = ~/.gitignore
+    commentChar = ";"
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	renames = true
+	mnemonicPrefix = true
+	tool = Kaleidoscope
+
+[difftool]
+	prompt = false
+	trustExitCode = true
+
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -21,54 +50,53 @@
 	required = true
 
 [fetch]
-  prune = true
+    prune = true
+	pruneTags = true
+	all = true
 
 [format]
-  pretty = %Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset
+    pretty = %Cblue%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold cyan)<%an>%Creset
 
 [help]
-  autocorrect = 1
+    autocorrect = 1
 
-[log]
-  abbrevCommit = true
-
-[pull]
-  ff = only
-
-[push]
-	default = current
-  followTags = true
-	autoSetupRemote = true
-
-[rebase]
-  autosquash = true
-
-[rerere]
-  enabled = true
-  autoupdate = false
-[user]
-	name = Greg Losie
-	email = greg@pco.bz
 [init]
 	defaultBranch = main
-[diff]
-	tool = Kaleidoscope
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
-	trustExitCode = true
+
+[log]
+    abbrevCommit = true
+
 [merge]
-  conflictStyle = zdiff3
+    conflictStyle = zdiff3
 	tool = Kaleidoscope
+
+[mergetool]
+	prompt = false
+
 [mergetool "Kaleidoscope"]
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustExitCode = true
-[mergetool]
-	prompt = false
-[credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+
+[pull]
+    ff = only
+
+[push]
+	default = simple
+    followTags = true
+	autoSetupRemote = true
+
+[rebase]
+    autosquash = true
+	autostash = true
+	; updateRefs = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
+
+[tag]
+	gpgSign = true
+	sort = version:refname
+
+[user]
+	signingkey = 5A73B2392D9AAA99F7277D0378D807CBF14CDE14
