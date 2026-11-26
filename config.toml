@@ -53,6 +53,10 @@ dot_prefix = true
 [dotfile_groups.home.entries]
 # Link the whole directory so lazy.nvim can rewrite lazy-lock.json in place.
 "~/.config/nvim" = { mode = "symlink" }
+# Copy the sandbox policy and agent wrappers so a sandboxed agent that edits
+# this repo cannot change the live files. Run `mise dot apply` to deploy edits.
+"~/.config/safehouse/local-overrides.sb" = { mode = "copy" }
+"~/.config/fish/conf.d/agent-safehouse.fish" = { mode = "copy" }
 
 [dotfiles]
 "~/.gitconfig.local" = { source = "templates/gitconfig.local.tmpl", mode = "template" }
@@ -66,6 +70,7 @@ dot_prefix = true
 "brew:gnupg" = { os = "macos" }
 "brew:fd" = { os = "macos" }
 "brew:postgresql@18" = { os = "macos" }
+"brew:eugene1g/safehouse/agent-safehouse" = { os = "macos" }
 "apt:fish" = { os = "linux" }
 "apt:git" = { os = "linux" }
 "apt:git-lfs" = { os = "linux" }

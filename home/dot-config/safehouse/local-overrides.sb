@@ -1,0 +1,333 @@
+;; ---------------------------------------------------------------------------
+;; Local overrides — appended to Safehouse-generated policy via --append-profile
+;;
+;; Contains grants Safehouse doesn't auto-detect:
+;;   - Devbox + Nix store
+;;   - Global dotfiles not covered by toolchain profiles
+;; ---------------------------------------------------------------------------
+
+;; Devbox + Nix store.
+;; Devbox state and config use XDG paths; the Nix store is read-only
+;; because the Nix daemon handles writes.
+(allow file-read* file-write*
+    (home-subpath "/.local/share/devbox")             ;; Devbox state.
+    (home-subpath "/.cache/devbox")                   ;; Devbox cache.
+    (home-subpath "/.config/devbox")                  ;; Devbox config.
+)
+
+;; Devbox also uses the macOS user cache dir (os.UserCacheDir).
+(allow file-read-metadata
+    (home-literal "/Library/Caches")                  ;; Parent stat for MkdirAll.
+)
+
+(allow file-read* file-write*
+    (home-subpath "/Library/Caches/devbox")           ;; Devbox cache.
+    (home-subpath "/Library/Caches/jetify")           ;; Jetify (devbox) cache.
+)
+
+(allow file-read*
+    (subpath "/nix")                                  ;; Nix store, profiles, channels (read-only).
+)
+
+;; Nix CLI user-level cache and state (separate from the daemon-managed store).
+(allow file-read* file-write*
+    (home-subpath "/.cache/nix")                      ;; Nix eval/fetch cache.
+    (home-subpath "/.local/state/nix")                ;; Nix CLI state.
+)
+
+;; ~/.config/nix is left out on purpose. It can hold access-tokens, and
+;; Safehouse keeps it unreadable by default.
+
+;; Nix daemon unix socket. Devbox runs `nix path-info` and installs through it.
+;; /nix/var/nix/daemon-socket/socket is a symlink to /var/run/nix-daemon.socket,
+;; and /var resolves to /private/var. Seatbelt checks connect() against the
+;; resolved path, so every hop is listed. (subpath "/nix") above covers
+;; reading the first symlink.
+(allow file-read*
+    (literal "/var/run/nix-daemon.socket")            ;; Intermediate symlink.
+    (literal "/private/var/run/nix-daemon.socket")    ;; Socket file.
+)
+
+(allow network-outbound
+    (remote unix-socket (path-literal "/nix/var/nix/daemon-socket/socket"))
+    (remote unix-socket (path-literal "/var/run/nix-daemon.socket"))
+    (remote unix-socket (path-literal "/private/var/run/nix-daemon.socket"))
+)
+
+;; pco-box: env setup and tooling sourced by devbox init hooks.
+(allow file-read*
+    (home-subpath "/pco-box")                         ;; pco-box env.sh + scripts.
+)
+
+;; yadm-managed dotfiles.
+;; Symlinks like ~/.gitconfig.local resolve through ~/.config/yadm/alt/.
+(allow file-read*
+    (home-subpath "/.config/yadm")                    ;; yadm alt targets + bootstrap.
+)
+
+;; Jujutsu (jj).
+;; jj keeps the user config and a per-repo trust store in ~/.config/jj. It
+;; writes repos/<hash>/metadata.binpb when it records a repo as trusted, so
+;; read-only access is not sufficient. Without this grant, every jj command in
+;; a repo outside ~/.config fails with "Failed to determine the secure config
+;; for a repo".
+(allow file-read* file-write*
+    (home-subpath "/.config/jj")                      ;; jj config + per-repo secure config metadata.
+)
+
+;; jjrk (jj workspace manager).
+;; jjrk reads its user config from ~/.config/jjrk/config.toml. It does not
+;; write to this directory, so read-only access is sufficient.
+(allow file-read*
+    (home-subpath "/.config/jjrk")                    ;; jjrk config.toml.
+)
+
+;; Fish autoloaded functions and completions.
+;; Safehouse grants config.fish, conf.d, and fish_variables, but not these two
+;; directories, which is where fisher installs plugins. Without them, plugin
+;; functions silently don't exist inside the sandbox.
+;; ~/.local/share/fish is left out on purpose: it holds fish_history, and the
+;; sandbox has no need to read every command ever typed.
+(allow file-read*
+    (home-subpath "/.config/fish/functions")          ;; Autoloaded functions, incl. fisher plugins.
+    (home-subpath "/.config/fish/completions")        ;; Plugin-supplied completions.
+)
+
+;; CircleCI plugin API token.
+;; The circleci skills read the token from this file to call the CircleCI API.
+;; Read-only: the plugin never rewrites it.
+(allow file-read*
+    (home-literal "/.config/circleci-plugin/token")   ;; CircleCI API token.
+)
+
+;; CircleCI CLI.
+;; mise installs the binary, and Safehouse already lets it run. The CLI keeps
+;; its config in XDG_CONFIG_HOME, extensions in XDG_DATA_HOME, and runtime
+;; state in XDG_STATE_HOME. Without the data grant, every command fails with
+;; "lstat ~/.local/share/circleci/extensions: operation not permitted". The
+;; CLI can keep its token in the keychain through go-keyring; the Codex
+;; keychain grants below cover that.
+(allow file-read* file-write*
+    (home-subpath "/.config/circleci")                ;; CLI config.yml (host, token).
+    (home-subpath "/.local/share/circleci")           ;; Installed extensions.
+    (home-subpath "/.local/state/circleci")           ;; Runtime state.
+)
+
+;; Agent hooks.
+;; Hook scripts are read and executed by agent tooling.
+(allow file-read*
+    (home-subpath "/.config/agent-hooks")             ;; Hook scripts + config.
+)
+
+(allow process-exec*
+    (home-subpath "/.config/agent-hooks")             ;; Run hook scripts.
+)
+
+;; Hunk MCP extension.
+;; `hunk extension install` clones extensions into ~/.hunk. The hunk-mcp
+;; extension serves the MCP bridge the agent connects to, so the agent must
+;; read and run it. Writes are allowed because the extension keeps its git
+;; clone, install record, and runtime state in the same directory.
+(allow file-read* file-write*
+    (home-subpath "/.hunk/hunk-mcp")                  ;; hunk-mcp extension clone + state.
+)
+
+(allow process-exec*
+    (home-subpath "/.hunk/hunk-mcp")                  ;; Run the MCP server.
+)
+
+;; Ancestor literal for ~/.hunk traversal.
+(allow file-read-metadata
+    (home-literal "/.hunk")
+)
+
+;; Hunk CLI.
+;; The CLI reads config.toml and installed extensions from ~/.config/hunk,
+;; and rewrites state.json on every run to record the last-seen CLI version.
+;; Without this grant, `hunk session` commands from skills such as pr-triage
+;; fail to read config.toml.
+(allow file-read* file-write*
+    (home-subpath "/.config/hunk")                    ;; Config, extensions, state.json.
+)
+
+;; Chrome DevTools MCP uses a separate cache from Playwright.
+;; This directory holds its browser profile and runtime state.
+(allow file-read* file-write*
+    (home-subpath "/.cache/chrome-devtools-mcp")
+)
+
+;; Rubocop cache (not covered by Safehouse ruby.sb).
+(allow file-read* file-write*
+    (home-subpath "/.cache/rubocop_cache")            ;; Rubocop lint result cache.
+)
+
+;; Home-level Node/Yarn workspace files.
+;; ~/package.json + ~/node_modules exist; Yarn walks up from project dirs
+;; and needs to read these when resolving the workspace root.
+(allow file-read*
+    (home-literal "/package.json")                    ;; Yarn workspace root probe.
+    (home-literal "/.yarnrc")                         ;; Legacy Yarn config.
+    (home-subpath "/node_modules")                    ;; Home-level node_modules.
+)
+
+;; Global dotfiles not covered by Safehouse toolchain profiles.
+(allow file-read*
+    (home-literal "/.npmrc")                          ;; npm registry config.
+    (home-literal "/.yarnrc.yml")                     ;; Yarn config.
+)
+
+;; Clipboard access.
+;; pbcopy/pbpaste (and any NSPasteboard client) talk to the pasteboard
+;; daemon over Mach IPC. Without this lookup, clipboard ops hang or fail.
+(allow mach-lookup
+    (global-name "com.apple.pasteboard.1")             ;; Modern NSPasteboard service.
+    (global-name "com.apple.pboard")                   ;; Legacy pasteboard service name.
+)
+
+(allow process-exec*
+    (literal "/usr/bin/pbcopy")                        ;; Write to clipboard.
+    (literal "/usr/bin/pbpaste")                       ;; Read from clipboard.
+)
+
+;; Obsidian CLI.
+;; The CLI reads its executable and connects to the running app.
+;; Vault access stays with the app outside the sandbox.
+(allow file-read*
+    (literal "/usr/local/bin/obsidian")
+    (literal "/Applications/Obsidian.app/Contents/MacOS/obsidian-cli")
+    (home-literal "/.obsidian-cli.sock")
+)
+
+(allow process-exec*
+    (literal "/usr/local/bin/obsidian")
+    (literal "/Applications/Obsidian.app/Contents/MacOS/obsidian-cli")
+)
+
+(allow network-outbound
+    (remote unix-socket
+        (path-literal (string-append HOME_DIR "/.obsidian-cli.sock")))
+)
+
+;; Zed editor CLI.
+;; /usr/local/bin/zed is a symlink to /Applications/Zed.app/Contents/MacOS/cli;
+;; the CLI hands off to the running Zed.app, which lives outside the sandbox.
+(allow file-read*
+    (literal "/usr/local/bin/zed")                    ;; CLI symlink.
+    (subpath "/Applications/Zed.app")                 ;; CLI binary + bundled frameworks.
+)
+
+(allow process-exec*
+    (literal "/usr/local/bin/zed")
+    (subpath "/Applications/Zed.app")
+)
+
+;; Note: `zed .` from inside Safehouse doesn't work end-to-end — the cli
+;; unconditionally calls NSWorkspace.launchApplication, which launchservicesd
+;; rejects with "PROHIBITING process from accessing session id" because the
+;; sandboxed process isn't in the GUI audit session. /usr/bin/open uses a
+;; URL-based LaunchServices path that doesn't have that restriction, so
+;; `open -a Zed.app .` is a substitute, but Safehouse blocks `open` unless the
+;; session runs with --enable=launch-services. The app it launches runs
+;; outside the sandbox with full user permissions. The grants above are kept
+;; so `zed --version` and similar non-launching invocations still work.
+
+;; cloud-agent (Planning Center remote dev instances).
+;; A single Go binary in ~/.local/bin. It talks to EC2, SSM, STS, and S3
+;; through the AWS SDK, so it needs the shared config and the SSO token cache
+;; in ~/.aws. Reads and writes both, because a credential refresh rewrites the
+;; cache. `--enable=cloud-credentials` grants the same thing plus gcloud,
+;; Azure, and azd; this grant is narrowed to AWS.
+(allow file-read* file-write*
+    (home-subpath "/.aws")                            ;; AWS profiles, SSO config, token cache.
+)
+
+(allow file-read*
+    (home-literal "/.local/bin/cloud-agent")          ;; cloud-agent binary.
+)
+
+;; cloud-agent keeps the session-to-instance map (sessions.json), its SSH
+;; host config, and known_hosts in ~/.cloud-agent. `do -s` and `cat -s` read
+;; and rewrite sessions.json on each call.
+(allow file-read* file-write*
+    (home-subpath "/.cloud-agent")                    ;; Session cache, ssh_config, known_hosts.
+)
+
+(allow process-exec*
+    (home-literal "/.local/bin/cloud-agent")
+)
+
+;; Note: an expired SSO session sends cloud-agent into a browser login flow,
+;; which launchservicesd rejects for the same audit-session reason as the Zed
+;; CLI below. Run `pco aws-login` outside Safehouse first; cloud-agent then
+;; reads the refreshed token from ~/.aws/sso/cache.
+
+;; Codex CLI.
+;; Safehouse ships 60-agents/codex.sb, but it only loads when the wrapped
+;; command is `codex` or under --enable=all-agents, which pulls in thirteen
+;; other agent profiles. Codex also runs nested under Claude through the codex
+;; plugin, so these grants mirror that one profile.
+(allow file-read* file-write*
+    (home-prefix "/.local/bin/codex")                 ;; codex + codex-code-mode-host entrypoints.
+    (home-prefix "/.local/bin/.codex.")
+    (home-subpath "/.codex")                          ;; Config, auth.json, session rollouts, logs.
+    (home-subpath "/.cache/codex")                    ;; Codex cache.
+)
+
+(allow file-read*
+    (home-literal "/Library/Preferences/com.openai.codex.plist")     ;; User preferences.
+    (literal "/Library/Preferences/com.openai.codex.plist")          ;; System preferences.
+    (literal "/Library/Managed Preferences/com.openai.codex.plist")  ;; MDM-managed preferences.
+    (subpath "/etc/codex")                                           ;; System-wide config layers.
+)
+
+;; Keychain access for Codex.
+;; codex.sb declares a keychain dependency, and Safehouse auto-injects
+;; 55-integrations-optional/keychain.sb when it selects that profile. An
+;; appended profile can't trigger that injection, so the grants are inlined.
+;; Equivalent to --enable=keychain: the login keychain becomes readable and
+;; writable inside the sandbox.
+(allow file-read* file-write*
+    (home-subpath "/Library/Keychains")                              ;; Keychain databases.
+    (home-literal "/Library/Preferences/com.apple.security.plist")   ;; User security preferences.
+)
+
+(allow file-read*
+    (literal "/Library/Preferences/com.apple.security.plist")        ;; Security preferences for the security CLI.
+    (literal "/Library/Keychains/System.keychain")                   ;; System keychain.
+    (subpath "/private/var/db/mds")                                  ;; MDS store hosting se_SecurityMessages for securityd IPC.
+)
+
+(allow file-read-metadata
+    (home-literal "/Library")                                        ;; Home traversal limited to the Library root.
+    (home-literal "/Library/Keychains")
+    (literal "/Library")
+    (literal "/Library/Keychains")
+)
+
+(allow mach-lookup
+    (global-name "com.apple.SecurityServer")                         ;; Keychain operations go through SecurityServer IPC.
+    (global-name "com.apple.security.agent")                         ;; Unlock and login prompts.
+    (global-name "com.apple.securityd.xpc")                          ;; Certificate and key queries.
+    (global-name "com.apple.security.authhost")                      ;; Interactive credential flows.
+    (global-name "com.apple.secd")                                   ;; Credential mediation.
+    (global-name "com.apple.trustd")                                 ;; Trust evaluation backend.
+)
+
+(allow ipc-posix-shm-read-data ipc-posix-shm-write-create ipc-posix-shm-write-data
+    (ipc-posix-name "com.apple.AppleDatabaseChanged")                ;; Keychain change notifications.
+)
+
+;; Claude Code background daemon.
+;; /fork and other background features start a daemon that listens on
+;; /tmp/cc-daemon-<uid>/<id>/control.sock. Safehouse grants file access to
+;; /tmp but only allows binding IP sockets, so listen() fails with EPERM.
+;; Seatbelt checks the resolved path, so both /tmp and /private/tmp are listed.
+(allow network-bind
+    (local unix-socket (path-regex #"^/private/tmp/cc-daemon-[0-9]+/"))
+    (local unix-socket (path-regex #"^/tmp/cc-daemon-[0-9]+/"))
+)
+
+(allow network-outbound
+    (remote unix-socket (path-regex #"^/private/tmp/cc-daemon-[0-9]+/"))
+    (remote unix-socket (path-regex #"^/tmp/cc-daemon-[0-9]+/"))
+)
