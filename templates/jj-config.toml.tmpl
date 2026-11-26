@@ -79,9 +79,7 @@ if(root,
 [fix.tools.rubocop]
 enabled = false
 command = [
-    "devbox",
-    "run",
-    "--pure",
+    "{{ env.HOME }}/.config/jj/bin/devbox-exec",
     "bundle",
     "exec",
     "rubocop",
@@ -111,7 +109,7 @@ patterns = [
 
 [fix.tools.stree]
 enabled = false
-command = ["devbox", "run", "--pure", "stree", "format"]
+command = ["{{ env.HOME }}/.config/jj/bin/devbox-exec", "stree", "format"]
 patterns = [
     "glob:'**/*.rb'",
     "glob:'**/*.gemspec'",

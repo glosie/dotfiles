@@ -1,0 +1,6 @@
+#!/bin/sh
+# Run a command in the devbox environment without `devbox run`. Parallel
+# `devbox run` calls share .devbox/gen/scripts/.cmd.sh and race on it.
+# `devbox shellenv` picks its output syntax from $SHELL, so force POSIX sh.
+eval "$(SHELL=/bin/sh devbox shellenv --pure 2>/dev/null)" || exit 1
+exec "$@"
