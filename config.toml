@@ -33,9 +33,10 @@ fnox = { version = "latest", workflow = "release.yml" }
 age = "latest"
 aws-cli = { version = "latest", symlink_bins = "true" }
 starship = "latest"
+swift = "6.4.3"
 
 [settings]
-idiomatic_version_file_enable_tools = []
+idiomatic_version_file_enable_tools = ["ruby"]
 dotfiles.root = "~/.config/mise"
 
 # Per-machine choice for templates. Set it with `mise vars machine_class=work`.
@@ -77,12 +78,12 @@ login_shell = "fish"
 
 [bootstrap.hooks.pre-packages]
 run = [
-  '''if [ "$(uname -s)" = Darwin ] && ! command -v brew >/dev/null 2>&1; then /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; fi''',
-  '''if [ "$(uname -s)" = Linux ] && command -v apt-add-repository >/dev/null 2>&1; then sudo apt-add-repository -y ppa:fish-shell/release-3; fi''',
+    '''if [ "$(uname -s)" = Darwin ] && ! command -v brew >/dev/null 2>&1; then /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"; fi''',
+    '''if [ "$(uname -s)" = Linux ] && command -v apt-add-repository >/dev/null 2>&1; then sudo apt-add-repository -y ppa:fish-shell/release-3; fi''',
 ]
 
 [bootstrap.hooks.post-dotfiles]
 run = [
-  '''if command -v fish >/dev/null 2>&1; then fish -c 'type -q fisher; or begin; curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; and fisher update; end'; fi''',
-  '''if command -v vim >/dev/null 2>&1; then vim -E -s -u ~/.vimrc +PlugUpdate '+PlugClean!' +qall || true; fi''',
+    '''if command -v fish >/dev/null 2>&1; then fish -c 'type -q fisher; or begin; curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; and fisher update; end'; fi''',
+    '''if command -v vim >/dev/null 2>&1; then vim -E -s -u ~/.vimrc +PlugUpdate '+PlugClean!' +qall || true; fi''',
 ]
