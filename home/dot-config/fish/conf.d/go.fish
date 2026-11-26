@@ -1,2 +1,2 @@
 set -gx GOPATH $HOME/go
-fish_add_path $GOPATH/bin
+fish_add_path --global $GOPATH/bin
