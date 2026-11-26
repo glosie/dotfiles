@@ -30,7 +30,10 @@ email = "greg@pco.bz"
 {% endif -%}
 
 [aliases]
-tidy = ["abandon", 'empty() & description(exact:"") & mutable() & ~merges() & ~@']
+tidy = [
+    "abandon",
+    'empty() & description(exact:"") & mutable() & ~merges() & ~@',
+]
 
 [revset-aliases]
 'recent_work' = 'ancestors(visible_heads(), 3) & mutable()'
@@ -75,40 +78,53 @@ if(root,
 
 [fix.tools.rubocop]
 enabled = false
-command = ["devbox", "run", "--pure", "bundle", "exec", "rubocop", "--stdin", "$path", "-a", "--stderr", "--fail-level", "fatal"]
+command = [
+    "devbox",
+    "run",
+    "--pure",
+    "bundle",
+    "exec",
+    "rubocop",
+    "--stdin",
+    "$path",
+    "-a",
+    "--stderr",
+    "--fail-level",
+    "fatal",
+]
 patterns = [
-  "glob:'**/*.rb'",
-  "glob:'**/*.gemspec'",
-  "glob:'**/*.rabl'",
-  "glob:'**/*.rake'",
-  "glob:'**/*.rbi'",
-  "glob:'**/*.rbuild'",
-  "glob:'**/*.rbs'",
-  "glob:'**/*.rbw'",
-  "glob:'**/*.rbx'",
-  "glob:'**/*.ru'",
-  "glob:'**/*.ruby'",
-  "glob:'**/*.spec'",
-  "glob:'**/*.thor'",
-  "glob:'**/*.watchr'",
+    "glob:'**/*.rb'",
+    "glob:'**/*.gemspec'",
+    "glob:'**/*.rabl'",
+    "glob:'**/*.rake'",
+    "glob:'**/*.rbi'",
+    "glob:'**/*.rbuild'",
+    "glob:'**/*.rbs'",
+    "glob:'**/*.rbw'",
+    "glob:'**/*.rbx'",
+    "glob:'**/*.ru'",
+    "glob:'**/*.ruby'",
+    "glob:'**/*.spec'",
+    "glob:'**/*.thor'",
+    "glob:'**/*.watchr'",
 ]
 
 [fix.tools.stree]
 enabled = false
 command = ["devbox", "run", "--pure", "stree", "format"]
 patterns = [
-  "glob:'**/*.rb'",
-  "glob:'**/*.gemspec'",
-  "glob:'**/*.rabl'",
-  "glob:'**/*.rake'",
-  "glob:'**/*.rbi'",
-  "glob:'**/*.rbuild'",
-  "glob:'**/*.rbs'",
-  "glob:'**/*.rbw'",
-  "glob:'**/*.rbx'",
-  "glob:'**/*.ru'",
-  "glob:'**/*.ruby'",
-  "glob:'**/*.spec'",
-  "glob:'**/*.thor'",
-  "glob:'**/*.watchr'",
+    "glob:'**/*.rb'",
+    "glob:'**/*.gemspec'",
+    "glob:'**/*.rabl'",
+    "glob:'**/*.rake'",
+    "glob:'**/*.rbi'",
+    "glob:'**/*.rbuild'",
+    "glob:'**/*.rbs'",
+    "glob:'**/*.rbw'",
+    "glob:'**/*.rbx'",
+    "glob:'**/*.ru'",
+    "glob:'**/*.ruby'",
+    "glob:'**/*.spec'",
+    "glob:'**/*.thor'",
+    "glob:'**/*.watchr'",
 ]
